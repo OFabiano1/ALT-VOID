@@ -16,7 +16,10 @@ bot = commands.Bot(command_prefix=">", intents=intents)
 # bot está online
 @bot.event
 async def on_ready():
-    print(f"Bot {bot.user} está online!")
+    print("─" * 50)
+    print(f"  {bot.user} - hello world! ᓬ(•⤙•๑)ᕒ")
+    print(f"  ↳ Powered by Axolotl BR © 2020 - 2026")
+    print("─" * 50)
 
 # hello world
 @bot.command()
@@ -27,25 +30,22 @@ async def axolotl(ctx):
 @bot.command()
 @commands.is_owner()
 async def restart(ctx):
-    await bot.close()  # fecha o bot corretamente antes de reiniciar
-    os.execv(sys.executable, [sys.executable] + sys.argv)
+    await ctx.send("🔄 reiniciando...")
+    await bot.close()
+    os.system(f'python "{sys.argv[0]}"')
+    sys.exit(0)
+
 # latencia
 @bot.command()
 async def ping(ctx):
     await ctx.send(f'pong!: {round(bot.latency*1000)}ms')
 
+async def main():
+    async with bot:
+        await bot.load_extension("cogs.auto_response")
+        await bot.load_extension("cogs.jogos")
+        await bot.load_extension("cogs.niveis")
+        await bot.load_extension("cogs.tickets")
+        await bot.start(TOKEN)
 
-async def load_extensions():
-    await bot.load_extension("cogs.auto_response")
-    await bot.load_extension("cogs.jogos")
-    await bot.load_extension("cogs.niveis")
-    await bot.load_extension("cogs.tickets")
-
-    async def main():
-        async with bot:
-            # carrega as cogs aqui
-            await bot.start(TOKEN)
-
-asyncio.run(load_extensions())
-
-bot.run(TOKEN)
+asyncio.run(main())
