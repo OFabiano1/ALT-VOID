@@ -21,14 +21,6 @@ async def on_ready():
     print(f"  ↳ Powered by Axolotl BR © 2020 - 2026")
     print("─" * 50)
 
-    @bot.event
-    async def on_ready():
-        print("─" * 50)
-        print(f"  {bot.user} - hello world! ᓬ(•⤙•๑)ᕒ")
-        print(f"  ↳ Powered by Axolotl BR © 2020 - 2026")
-        print("─" * 50)
-
-
 # hello world
 @bot.command()
 async def axolotl(ctx):
